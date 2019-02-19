@@ -25,7 +25,7 @@ function transform(src, filename, options) {
   });
 
   // Pass the transformed source to the original react native transformer
-  return () => babelCompileResult;
+  return babelCompileResult;
 }
 
 module.exports.transform = transform;
