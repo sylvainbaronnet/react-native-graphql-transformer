@@ -7,23 +7,7 @@ const reactNativeVersionString = require('react-native/package.json').version;
 
 const reactNativeMinorVersion = semver(reactNativeVersionString).minor;
 
-if (reactNativeMinorVersion >= 56) {
-  upstreamTransformer = require('metro/src/reactNativeTransformer')
-} else if (reactNativeMinorVersion >= 52) {
-  upstreamTransformer = require('metro/src/transformer');
-} else if (reactNativeMinorVersion >= 0.47) {
-  upstreamTransformer = require('metro-bundler/src/transformer');
-} else if (reactNativeMinorVersion === 0.46) {
-  upstreamTransformer = require('metro-bundler/build/transformer');
-} else {
-  // handle RN <= 0.45
-  const oldUpstreamTransformer = require('react-native/packager/transformer');
-  upstreamTransformer = {
-    transform({ src, filename, options }) {
-      return oldUpstreamTransformer.transform(src, filename, options);
-    },
-  };
-}
+upstreamTransformer = require('metro/src/DeltaBundler/Transformer.js')
 
 const gqlTransform = gqlLoader.bind({
   cacheable: () => null,
