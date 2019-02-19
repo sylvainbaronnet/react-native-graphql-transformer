@@ -1,13 +1,6 @@
 const gqlLoader = require('graphql-tag/loader');
-const semver = require('semver');
 
-let upstreamTransformer = null;
-
-const reactNativeVersionString = require('react-native/package.json').version;
-
-const reactNativeMinorVersion = semver(reactNativeVersionString).minor;
-
-upstreamTransformer = require('metro/src/DeltaBundler/Transformer.js')
+const upstreamTransformer = require('metro/src/DeltaBundler/Transformer.js')
 
 const gqlTransform = gqlLoader.bind({
   cacheable: () => null,
